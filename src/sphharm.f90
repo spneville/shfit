@@ -201,6 +201,41 @@
     return
     
   end function factorial
-  
+
+!######################################################################
+! xyz2ang: For a given point (x,y,z) on the surface of a unit sphere,
+!          computes the polar and azimuthal angles theta and phi,
+!          respectively
+!######################################################################
+  subroutine xyz2ang(x,y,z,theta,phi)
+
+    implicit none
+
+    double precision, intent(in)  :: x,y,z
+    double precision, intent(out) :: theta,phi
+    double precision              :: pi,phibar
+
+    pi=2.0d0*acos(0.0d0)
+    
+    ! Theta
+    theta=acos(z)
+    
+    ! Phi
+    ! Note that there is some messing about here because
+    ! the atan2 function returns values in (-pi,pi], whereas
+    ! we need phi to be in the interval [0,pi)
+    phibar=atan2(y,x)
+    if (y>=0.0d0) then
+       phi=phibar+pi/2.0d0
+    else if (y<0.0d0.and.x>=0.0d0) then
+       phi=phibar+pi/2.0d0
+    else
+       phi=phibar+5.0d0*pi/2.0d0
+    endif
+    
+    return
+    
+  end subroutine xyz2ang
+    
 !######################################################################
   

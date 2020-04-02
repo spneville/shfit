@@ -44,10 +44,10 @@ program test
   overlap=0.0d0
 
   ! m and l values
-  l=7
-  m=5
-  lp=7
-  mp=5
+  l=6
+  m=0
+  lp=6
+  mp=0
   
   ! Loop over the Lebedev quadrature points
   do i=1,n

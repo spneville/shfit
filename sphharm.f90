@@ -14,6 +14,7 @@ contains
     integer, intent(in)          :: m,l
     double precision, intent(in) :: theta,phi
     double precision             :: Ylm_real
+    integer                      :: mabs
     double precision             :: Plm,prefac
     double precision             :: pi
 
@@ -41,13 +42,14 @@ contains
     ! Compute the associated Legendre polynomial P_l|m|
     ! Note that |m| is used here
     !
-    Plm=plgndr(l,abs(m),cos(theta))
+    mabs=abs(m)
+    Plm=plgndr(l,mabs,cos(theta))
 
     !
     ! Prefactor
     !
-    prefac=dble(2*l+1)*dble(factorial(l-m))/dble(factorial(l+m))
-    if (m>0) prefac=prefac*2.0d0
+    prefac=dble(2*l+1)*dble(factorial(l-mabs))/dble(factorial(l+mabs))
+    if (mabs>0) prefac=prefac*2.0d0
     prefac=prefac/(4.0d0*pi)
     prefac=sqrt(prefac)
         
@@ -57,7 +59,7 @@ contains
     if (m>=0) then
        Ylm_real=prefac*Plm*cos(m*phi)
     else
-       Ylm_real=prefac*Plm*sin(abs(m)*phi)
+       Ylm_real=prefac*Plm*sin(mabs*phi)
     endif
 
     return

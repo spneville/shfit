@@ -1,0 +1,1 @@
+/usr/local/bin/ifort -g -O2 -cpp -stand f08 -free -implicitnone -traceback -dynamiclib -Wl,-headerpad_max_install_names  -o libshfit.dylib -install_name @rpath/libshfit.dylib CMakeFiles/shfit.dir/src/genpoints.f90.o CMakeFiles/shfit.dir/src/lebedev.f90.o CMakeFiles/shfit.dir/src/sphharm.f90.o 

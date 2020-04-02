@@ -48,8 +48,9 @@ contains
     !
     prefac=dble(2*l+1)*dble(factorial(l-m))/dble(factorial(l+m))
     if (m>0) prefac=prefac*2.0d0
+    prefac=prefac/(4.0d0*pi)
     prefac=sqrt(prefac)
-    
+        
     !
     ! Real speherical harmonic value
     !

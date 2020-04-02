@@ -46,7 +46,7 @@ program test
   ! m and l values
   l=7
   m=5
-  lp=8
+  lp=7
   mp=5
   
   ! Loop over the Lebedev quadrature points
@@ -74,6 +74,9 @@ program test
      
   enddo
 
+  ! 4pi prefactor
+  overlap=overlap*4.0d0*pi
+  
   print*,''
   print*,overlap
   

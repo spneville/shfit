@@ -45,9 +45,9 @@ program test
 
   ! m and l values
   l=6
-  m=0
+  m=-6
   lp=6
-  mp=0
+  mp=-6
   
   ! Loop over the Lebedev quadrature points
   do i=1,n

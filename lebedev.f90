@@ -1,42 +1,4 @@
-!**********************************************************************
-! A simple program to generate Lebedev quadrature points and weights
-! using the library routines of Dmitri N. Laikov
-!**********************************************************************
-program genpoints
-
-  implicit none
-
-  integer                       :: npnts,n,i,iout
-  double precision, allocatable :: x(:),y(:),z(:),w(:)
-  character(len=60)             :: filename
-  
-  !
-  ! Set the number of quadrature points.
-  ! This can only take one of the following valeues:
-  ! 6,14,26,38,50,74,86,110,146,170,194,230,266,302,350,434,590
-  !
-  npnts=194
-
-  !
-  ! Allocate the quadrature points and weights arrays
-  !
-  allocate(x(npnts),y(npnts),z(npnts),w(npnts))
-
-  !
-  ! Get the quadrature points and weights
-  !
-  call ld0194(x,y,z,w,n)
-
-  !
-  ! Write the quadrature points and weights to file
-  !
-  iout=20
-  write(filename,'(a,i0,a)') 'lebedev',npnts,'.dat'
-  open(iout,file=filename,form='formatted',status='unknown')  
-  do i=1,n
-     write(iout,*) i,x(i),y(i),z(i),w(i)
-  enddo
-  close(iout)
+module lebedev
   
 contains
   
@@ -1307,4 +1269,4 @@ contains
 
 !######################################################################
 
-   end program genpoints
+   end module lebedev

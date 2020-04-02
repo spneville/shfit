@@ -3,7 +3,68 @@ module sphharm
 contains
 
 !######################################################################
-! Ylm: Computes the spherical harmonics Ylm(theta,phi).
+! Ylm_real: Computes the normalised real spherical harmonics.
+!      Here, as usual, theta in [0,pi] and phi in [0,2pi] are the
+!      polar and azimuthal angles, respectively.
+!######################################################################
+  function Ylm_real(l,m,theta,phi)
+
+    implicit none
+
+    integer, intent(in)          :: m,l
+    double precision, intent(in) :: theta,phi
+    double precision             :: Ylm_real
+    double precision             :: Plm,prefac
+    double precision             :: pi
+
+    pi=2.0d0*acos(0.0d0)
+    
+    !
+    ! Check on the m and l values
+    !
+    if (m>abs(l)) then
+       write(6,'(/,a,x,i0,x,i0,/)') 'Error in Yml. &
+            Illegal m,l values:',m,l
+       stop
+    endif
+
+    !
+    ! Check on the angle values
+    !
+    if (theta<0.0d0.or.theta>pi.or.phi<0.0d0.or.phi>2.0d0*pi) then
+       write(6,'(/,a,x,F5.2,x,F5.2,/)') 'Error in Yml. &
+            Illegal theta,phi values:',m,l
+       stop
+    endif
+
+    !
+    ! Compute the associated Legendre polynomial P_l|m|
+    ! Note that |m| is used here
+    !
+    Plm=plgndr(l,abs(m),cos(theta))
+
+    !
+    ! Prefactor
+    !
+    prefac=dble(2*l+1)*dble(factorial(l-m))/dble(factorial(l+m))
+    if (m>0) prefac=prefac*2.0d0
+    prefac=sqrt(prefac)
+    
+    !
+    ! Real speherical harmonic value
+    !
+    if (m>=0) then
+       Ylm_real=prefac*Plm*cos(m*phi)
+    else
+       Ylm_real=prefac*Plm*sin(abs(m)*phi)
+    endif
+
+    return
+
+  end function Ylm_real
+    
+!######################################################################
+! Ylm: Computes the normalised spherical harmonics.
 !      Here, as usual, theta in [0,pi] and phi in [0,2pi] are the
 !      polar and azimuthal angles, respectively.
 !######################################################################
@@ -38,7 +99,7 @@ contains
     endif
     
     !
-    ! Compute the associated Legendre polynomial P_l^m
+    ! Compute the associated Legendre polynomial P_lm
     !
     Plm=plgndr(l,m,cos(theta))
     
@@ -46,7 +107,8 @@ contains
     ! Prefactor
     !
     prefac=(2*l+1)*factorial(l-m)/4.0d0*pi/factorial(l+m)
-
+    prefac=sqrt(prefac)
+    
     !
     ! Spherical harmonic value
     !

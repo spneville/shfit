@@ -1,6 +1,3 @@
-module sphharm
-
-contains
 
 !######################################################################
 ! Ylm_real: Computes the normalised real spherical harmonics.
@@ -18,14 +15,17 @@ contains
     double precision             :: Plm,prefac
     double precision             :: pi
 
+    integer          :: factorial
+    double precision :: plgndr
+    
     pi=2.0d0*acos(0.0d0)
     
     !
     ! Check on the m and l values
     !
     if (m>abs(l)) then
-       write(6,'(/,a,x,i0,x,i0,/)') 'Error in Yml. &
-            Illegal m,l values:',m,l
+       write(6,'(/,a,1x,i0,1x,i0,/)') 'Error in Yml.'&
+            //' Illegal m,l values:',m,l
        stop
     endif
 
@@ -33,8 +33,8 @@ contains
     ! Check on the angle values
     !
     if (theta<0.0d0.or.theta>pi.or.phi<0.0d0.or.phi>2.0d0*pi) then
-       write(6,'(/,a,x,F5.2,x,F5.2,/)') 'Error in Yml. &
-            Illegal theta,phi values:',m,l
+       write(6,'(/,a,1x,F5.2,1x,F5.2,/)') 'Error in Yml.' &
+            //' Illegal theta,phi values:',m,l
        stop
     endif
 
@@ -75,11 +75,16 @@ contains
 
     implicit none
 
+    integer, parameter :: dp = selected_real_kind(15,50)
+    
     integer, intent(in)          :: m,l
     double precision, intent(in) :: theta,phi
-    complex*16                   :: Ylm
+    complex(dp)                  :: Ylm
     double precision             :: Plm,prefac
     double precision             :: pi
+
+    integer          :: factorial
+    double precision :: plgndr
     
     pi=2.0d0*acos(0.0d0)
     
@@ -87,8 +92,8 @@ contains
     ! Check on the m and l values
     !
     if (m>abs(l)) then
-       write(6,'(/,a,x,i0,x,i0,/)') 'Error in Yml. &
-            Illegal m,l values:',m,l
+       write(6,'(/,a,1x,i0,1x,i0,/)') 'Error in Yml.'&
+            //' Illegal m,l values:',m,l
        stop
     endif
 
@@ -96,8 +101,8 @@ contains
     ! Check on the angle values
     !
     if (theta<0.0d0.or.theta>pi.or.phi<0.0d0.or.phi>2.0d0*pi) then
-       write(6,'(/,a,x,F5.2,x,F5.2,/)') 'Error in Yml. &
-            Illegal theta,phi values:',m,l
+       write(6,'(/,a,1x,F5.2,1x,F5.2,/)') 'Error in Yml.' &
+            //' Illegal theta,phi values:',m,l
        stop
     endif
     
@@ -199,4 +204,3 @@ contains
   
 !######################################################################
   
-end module sphharm

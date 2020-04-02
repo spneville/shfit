@@ -1,7 +1,3 @@
-module lebedev
-  
-contains
-  
 !######################################################################
   
   subroutine gen_oh(code, num, x, y, z, w, a, b, v)
@@ -1268,5 +1264,3 @@ contains
      END SUBROUTINE LD0590
 
 !######################################################################
-
-   end module lebedev

@@ -83,7 +83,7 @@
     double precision             :: Plm,prefac
     double precision             :: pi
 
-    integer          :: factorial
+    integer(8)       :: factorial
     double precision :: plgndr
     
     pi=2.0d0*acos(0.0d0)

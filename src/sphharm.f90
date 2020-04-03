@@ -15,7 +15,7 @@
     double precision             :: Plm,prefac
     double precision             :: pi
 
-    integer          :: factorial
+    integer(8)       :: factorial
     double precision :: plgndr
     
     pi=2.0d0*acos(0.0d0)
@@ -52,7 +52,7 @@
     if (mabs>0) prefac=prefac*2.0d0
     prefac=prefac/(4.0d0*pi)
     prefac=sqrt(prefac)
-        
+
     !
     ! Real speherical harmonic value
     !
@@ -144,7 +144,7 @@
     integer                      :: i,ll
     double precision             :: fact,pll,pmm,pmmp1,somx2
 
-    if (m.lt.0.0d0.or.m.gt.l.or.abs(x).gt.1.0d0) then
+    if (m.lt.0.or.m.gt.l.or.abs(x).gt.1.0d0) then
        write(6,'(a)') 'Bad arguments in plgndr' 
        stop
     endif
@@ -187,7 +187,7 @@
     implicit none
 
     integer, intent(in) :: n
-    integer             :: factorial
+    integer(8)          :: factorial
     integer             :: i
 
     factorial=1
